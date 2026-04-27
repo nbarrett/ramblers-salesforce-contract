@@ -4,5 +4,5 @@ export { listMembersQuerySchema, consentUpdateRequestSchema } from "./schemas.js
 export { buildOpenApiDocument } from "./openapi.js";
 export type { OpenApiBuildOptions } from "./openapi.js";
 export type { ColumnDef, ParseKind } from "./columns.js";
-export { INSIGHT_HUB_COLUMNS } from "./columns.js";
+export { INSIGHT_HUB_COLUMNS, findColumn, normaliseHeader } from "./columns.js";
 //# sourceMappingURL=index.d.ts.map

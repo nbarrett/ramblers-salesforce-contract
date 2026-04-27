@@ -20,7 +20,7 @@
     "src"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json && cp -R schema dist/schema",
+    "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "check:schema-sync": "tsx scripts/check-schema-sync.ts"
   },
