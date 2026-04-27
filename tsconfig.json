@@ -22,5 +22,5 @@
     "noEmit": true,
     "allowImportingTsExtensions": false
   },
-  "include": ["src/**/*", "scripts/**/*"]
+  "include": ["src/**/*", "scripts/**/*", "eslint.config.ts"]
 }

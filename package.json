@@ -22,15 +22,20 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
-    "check:schema-sync": "tsx scripts/check-schema-sync.ts"
+    "lint": "eslint 'src/**/*.ts' 'scripts/**/*.ts'",
+    "check:schema-sync": "tsx scripts/check-schema-sync.ts",
+    "setup:hooks": "bash tools/setup-git-hooks.sh"
   },
   "dependencies": {
     "zod": "3.25.76"
   },
   "devDependencies": {
     "@types/node": "20.19.39",
+    "eslint": "9.39.4",
+    "jiti": "2.6.0",
     "tsx": "4.21.0",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.59.1"
   },
   "engines": {
     "node": ">=20.0.0"

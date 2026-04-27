@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -e
+
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+
+cd "$ROOT_DIR"
+
+echo "Running pre-push checks..."
+
+echo "  → typecheck"
+pnpm --silent typecheck
+
+echo "  → lint"
+pnpm --silent lint
+
+echo "  → build"
+pnpm --silent build
+
+echo "Pre-push checks passed!"
