@@ -1,0 +1,43 @@
+{
+  "name": "@ramblers/sf-contract",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Wire-format contract for the Ramblers Salesforce API: TypeScript types, Zod schemas, OpenAPI builder, error envelope, Insight Hub column definitions. Consumed by ramblers-salesforce-mock today and the production ramblers-salesforce-server when it arrives.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./schema/salesforce-api.schema.json": "./schema/salesforce-api.schema.json"
+  },
+  "files": [
+    "dist",
+    "schema",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && cp -R schema dist/schema",
+    "typecheck": "tsc --noEmit",
+    "check:schema-sync": "tsx scripts/check-schema-sync.ts"
+  },
+  "dependencies": {
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.39",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "pnpm@10.11.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nbarrett/ramblers-salesforce-contract.git"
+  }
+}

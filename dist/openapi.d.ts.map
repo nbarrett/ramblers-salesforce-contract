@@ -1,0 +1,1 @@
+{"version":3,"file":"openapi.d.ts","sourceRoot":"","sources":["../src/openapi.ts"],"names":[],"mappings":"AAQA,MAAM,WAAW,mBAAmB;IAClC,aAAa,EAAE,MAAM,CAAC;CACvB;AAED,wBAAgB,oBAAoB,CAAC,OAAO,EAAE,mBAAmB,GAAG,MAAM,CAAC,MAAM,EAAE,OAAO,CAAC,CAgJ1F"}
