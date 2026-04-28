@@ -2,6 +2,16 @@
 
 All notable changes to `@ramblers/sf-contract` are recorded here. The package follows [semver](https://semver.org/): a major version bump signals a breaking change to the wire format, types or schemas. Both consumers (`ramblers-salesforce-mock` and `ramblers-salesforce-server`) pin a tag and update deliberately.
 
+## [v0.3.0] — 2026-04-28
+
+### Changed
+
+- **`buildOpenApiDocument(options)` now requires an `info` block** (`title`, `version`, `description`, optional `contact`). Previously the title, version, description and contact were hard-coded inside the builder, which meant both servers served `"Ramblers Salesforce API — Mock Server"` and the mock-flavoured admin / synthetic-data description text on their `/docs` pages. Each consumer now passes its own `info` describing what it actually is. New optional `serverDescription` lets each consumer label the entry in `servers[]` ("Mock deployment", "Production deployment", "Deployment" etc.).
+
+### Migration
+
+Both consumers (mock and server) bumped from `v0.2.0` to `v0.3.0` in the same hour. Each `src/api/openapi.ts` now passes its own `info` block. No wire-format changes; this is purely a consumer-API change to the builder.
+
 ## [v0.2.0] — 2026-04-28
 
 ### Added
