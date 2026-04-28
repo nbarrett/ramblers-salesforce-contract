@@ -27,3 +27,11 @@ export type { OpenApiBuildOptions } from "./openapi.js";
 
 export type { ColumnDef, ParseKind } from "./columns.js";
 export { INSIGHT_HUB_COLUMNS, findColumn, normaliseHeader } from "./columns.js";
+
+export type {
+  ListMembersOptions,
+  ApplyConsentOptions,
+  ListMembersResult,
+  ApplyConsentResult,
+  MemberProvider,
+} from "./member-provider.js";

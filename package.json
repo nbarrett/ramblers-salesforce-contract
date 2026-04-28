@@ -1,6 +1,6 @@
 {
   "name": "@ramblers/sf-contract",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "description": "Wire-format contract for the Ramblers Salesforce API: TypeScript types, Zod schemas, OpenAPI builder, error envelope, Insight Hub column definitions. Consumed by ramblers-salesforce-mock today and the production ramblers-salesforce-server when it arrives.",
   "license": "MIT",
