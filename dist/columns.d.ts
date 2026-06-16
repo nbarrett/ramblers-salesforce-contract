@@ -1,4 +1,4 @@
-export type ParseKind = "string" | "date" | "boolean" | "memberTerm" | "membershipType";
+export type ParseKind = "string" | "date" | "boolean" | "memberTerm";
 export interface ColumnDef {
     header: string;
     apiKey: string;

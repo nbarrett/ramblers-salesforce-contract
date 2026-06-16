@@ -1,4 +1,4 @@
-export type MemberTerm = "life" | "annual";
+export type MemberTerm = "Annual" | "Life";
 export type ChangeType = "added" | "updated" | "removed";
 export type RemovalReason = "expired" | "transferred" | "deceased" | "other";
 export type ConsentSource = "ngx-ramblers" | "mailman";
@@ -51,10 +51,10 @@ export interface SalesforceMember {
   memberType?: string;
   memberTerm?: MemberTerm;
   memberStatus?: string;
-  membershipType?: string;
+  membershipArrangement?: string;
   jointWith?: string;
   membershipExpiryDate?: string;
-  ramblersJoinDate?: string;
+  ramblersJoinedDate?: string;
 
   areaName?: string;
   areaJoinedDate?: string;

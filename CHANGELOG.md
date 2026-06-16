@@ -2,6 +2,22 @@
 
 All notable changes to `@ramblers/sf-contract` are recorded here. The package follows [semver](https://semver.org/): a major version bump signals a breaking change to the wire format, types or schemas. Both consumers (`ramblers-salesforce-mock` and `ramblers-salesforce-server`) pin a tag and update deliberately.
 
+## [v0.4.0] — 2026-06-16
+
+Breaking wire-format change. Settles the three field-naming points Charlie Bigley raised and Nick replied to on 11 May (with Gary at HQ copied), now integrated into [nbarrett/ngx-ramblers#209](https://github.com/nbarrett/ngx-ramblers/issues/209). Both consumers pin `v0.4.0` and update together.
+
+### Changed
+
+- **`ramblersJoinDate` renamed to `ramblersJoinedDate`.** Standardises the three join-date fields on "Joined" (`ramblersJoinedDate`, `areaJoinedDate`, `groupJoinedDate`). The Insight Hub source is itself inconsistent ("Ramblers Join Date" vs "Area Joined Date"), so there is no source convention worth preserving now that Insight Hub is being retired.
+- **`membershipType` renamed to `membershipArrangement`.** Carries the Individual / Joint values. The previous name collided with `memberType` (Member / Affiliate); `membershipArrangement` reads neutrally between an Individual arrangement and a Joint arrangement.
+- **Corrected the crossed descriptions.** `memberType` describes Member / Affiliate; `membershipArrangement` describes Individual / Joint. The two were the wrong way round.
+- **Value vocabularies title-cased to match the export.** `memberTerm` enum is now `"Annual"` / `"Life"` (was lowercase). `memberType` (`"Member"` / `"Affiliate"`), `memberStatus` (`"Active"` / `"Payment pending"`) and `membershipArrangement` (`"Individual"` / `"Joint"`) are documented in title case.
+- **Removed the unused `membershipType` `ParseKind`.** No column produced it; the "Type" column parses as a plain string.
+
+### Migration
+
+Consumers that read `member.ramblersJoinDate` or `member.membershipType` must move to `ramblersJoinedDate` and `membershipArrangement`. Code comparing `memberTerm` against `"life"` / `"annual"` must compare against `"Life"` / `"Annual"`.
+
 ## [v0.3.0] — 2026-04-28
 
 ### Changed
