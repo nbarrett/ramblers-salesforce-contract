@@ -1,4 +1,22 @@
 import salesforceApiSchema from "../schema/salesforce-api.schema.json" with { type: "json" };
+function securitySchemesFor(security) {
+    if (security.kind === "entra") {
+        const base = "Microsoft Entra ID access token (OAuth2 client-credentials).";
+        return {
+            bearerAuth: {
+                type: "http",
+                scheme: "bearer",
+                bearerFormat: "JWT",
+                description: security.openIdConnectUrl !== undefined
+                    ? `${base} OpenID configuration: ${security.openIdConnectUrl}`
+                    : base,
+            },
+        };
+    }
+    return {
+        bearerAuth: { type: "http", scheme: "bearer", bearerFormat: "opaque" },
+    };
+}
 export function buildOpenApiDocument(options) {
     const parsed = salesforceApiSchema;
     const rewriteRefs = (value) => {
@@ -35,9 +53,7 @@ export function buildOpenApiDocument(options) {
         ],
         security: [{ bearerAuth: [] }],
         components: {
-            securitySchemes: {
-                bearerAuth: { type: "http", scheme: "bearer", bearerFormat: "opaque" },
-            },
+            securitySchemes: securitySchemesFor(options.security ?? { kind: "opaque" }),
             schemas,
         },
         paths: {

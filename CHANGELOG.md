@@ -2,6 +2,19 @@
 
 All notable changes to `@ramblers/sf-contract` are recorded here. The package follows [semver](https://semver.org/): a major version bump signals a breaking change to the wire format, types or schemas. Both consumers (`ramblers-salesforce-mock` and `ramblers-salesforce-server`) pin a tag and update deliberately.
 
+## [v0.5.0] — 2026-06-21
+
+Adds a static OpenAPI artifact and an Entra-aware security scheme. No wire-format change: the schemas, types and endpoints are identical to v0.4.0, so consumers adopt it without code changes.
+
+### Added
+
+- **Static `openapi/openapi.json` and `openapi/openapi.yaml`**, generated from `buildOpenApiDocument()`, committed to the repo and shipped in the package `files`. A consumer can now generate a typed client in any language straight from the document, without running Node or importing the TypeScript builder. `pnpm build:openapi` regenerates them; `pnpm check:openapi-sync` fails CI if the committed files no longer match the builder, the same way `check:schema-sync` guards the JSON Schema against #209.
+- **`security` option on `buildOpenApiDocument()`** (`OpenApiSecurity`). `{ kind: "opaque" }` is the default and keeps the existing opaque bearer (the mock's local mode), so existing callers are unaffected. `{ kind: "entra", openIdConnectUrl? }` describes a Microsoft Entra ID JWT bearer (`bearerFormat: "JWT"`, with the OpenID configuration URL in the description) for the production servers. The static artifact is built with the Entra scheme.
+
+### Migration
+
+None. Existing callers of `buildOpenApiDocument()` need no change - `security` defaults to opaque. A consumer that wants to advertise Entra passes `security: { kind: "entra", openIdConnectUrl }`.
+
 ## [v0.4.0] — 2026-06-16
 
 Breaking wire-format change. Settles the three field-naming points Charlie Bigley raised and Nick replied to on 11 May (with Gary at HQ copied), now integrated into [nbarrett/ngx-ramblers#209](https://github.com/nbarrett/ngx-ramblers/issues/209). Both consumers pin `v0.4.0` and update together.

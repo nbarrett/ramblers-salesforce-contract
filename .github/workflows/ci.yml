@@ -24,3 +24,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm check:schema-sync
+      - name: OpenAPI artifact in sync with the builder
+        run: pnpm check:openapi-sync

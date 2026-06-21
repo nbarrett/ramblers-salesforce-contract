@@ -16,10 +16,35 @@ export interface OpenApiInfo {
   };
 }
 
+export type OpenApiSecurity =
+  | { kind: "opaque" }
+  | { kind: "entra"; openIdConnectUrl?: string };
+
 export interface OpenApiBuildOptions {
   publicBaseUrl: string;
   info: OpenApiInfo;
   serverDescription?: string;
+  security?: OpenApiSecurity;
+}
+
+function securitySchemesFor(security: OpenApiSecurity): Record<string, unknown> {
+  if (security.kind === "entra") {
+    const base = "Microsoft Entra ID access token (OAuth2 client-credentials).";
+    return {
+      bearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+        description:
+          security.openIdConnectUrl !== undefined
+            ? `${base} OpenID configuration: ${security.openIdConnectUrl}`
+            : base,
+      },
+    };
+  }
+  return {
+    bearerAuth: { type: "http", scheme: "bearer", bearerFormat: "opaque" },
+  };
 }
 
 export function buildOpenApiDocument(options: OpenApiBuildOptions): Record<string, unknown> {
@@ -59,9 +84,7 @@ export function buildOpenApiDocument(options: OpenApiBuildOptions): Record<strin
     ],
     security: [{ bearerAuth: [] }],
     components: {
-      securitySchemes: {
-        bearerAuth: { type: "http", scheme: "bearer", bearerFormat: "opaque" },
-      },
+      securitySchemes: securitySchemesFor(options.security ?? { kind: "opaque" }),
       schemas,
     },
     paths: {
