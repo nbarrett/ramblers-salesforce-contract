@@ -2,6 +2,10 @@
 
 All notable changes to `@ramblers/sf-contract` are recorded here. The package follows [semver](https://semver.org/): a major version bump signals a breaking change to the wire format, types or schemas. Both consumers (`ramblers-salesforce-mock` and `ramblers-salesforce-server`) pin a tag and update deliberately.
 
+## [v1.0.1] — 2026-07-23
+
+- Added shared Zod validators for supporter responses, volunteer roles, published errors and writeback success responses so consumers reject invalid payloads before reconciliation.
+
 ## [v1.0.0] — 2026-07-22
 
 **Breaking: the contract now mirrors the API published by Ramblers Head office** — [JAMESKEARS/ramblers-group-email 1.0.0](https://app.swaggerhub.com/apis/JAMESKEARS/ramblers-group-email/1.0.0) on SwaggerHub — instead of the jointly-proposed #209 shape, which it supersedes.

@@ -1,6 +1,6 @@
 {
   "name": "@ramblers/sf-contract",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "Wire-format contract for the Ramblers Team Emails API: TypeScript types, Zod schemas, OpenAPI mirror of the published upstream spec (JAMESKEARS/ramblers-group-email), error mappings, Insight Hub column definitions. Consumed by ramblers-salesforce-mock and NGX-Ramblers.",
   "license": "MIT",
