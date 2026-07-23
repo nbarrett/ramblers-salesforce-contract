@@ -20,7 +20,7 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm lint
       - run: pnpm build
-      - name: Schema sync against ngx-ramblers#209
+      - name: Schema sync against Ramblers Team Emails 1.0.0
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm check:schema-sync
