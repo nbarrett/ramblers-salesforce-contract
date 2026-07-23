@@ -1,16 +1,18 @@
 {
   "name": "@ramblers/sf-contract",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "description": "Wire-format contract for the Ramblers Team Emails API: TypeScript types, Zod schemas, OpenAPI mirror of the published upstream spec (JAMESKEARS/ramblers-group-email), error mappings, Insight Hub column definitions. Consumed by ramblers-salesforce-mock and NGX-Ramblers.",
   "license": "MIT",
   "type": "module",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./schema/salesforce-api.schema.json": "./schema/salesforce-api.schema.json"
   },
@@ -21,7 +23,7 @@
     "src"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && esbuild src/index.ts --bundle --platform=node --target=node20 --format=cjs --outfile=dist/index.cjs --sourcemap --external:zod",
     "build:openapi": "tsx scripts/build-openapi.ts",
     "typecheck": "tsc --noEmit",
     "lint": "eslint 'src/**/*.ts' 'scripts/**/*.ts'",
@@ -34,6 +36,7 @@
   },
   "devDependencies": {
     "@types/node": "20.19.39",
+    "esbuild": "0.25.10",
     "eslint": "9.39.4",
     "jiti": "2.6.0",
     "tsx": "4.21.0",

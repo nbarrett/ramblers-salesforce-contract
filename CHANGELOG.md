@@ -2,6 +2,10 @@
 
 All notable changes to `@ramblers/sf-contract` are recorded here. The package follows [semver](https://semver.org/): a major version bump signals a breaking change to the wire format, types or schemas. Both consumers (`ramblers-salesforce-mock` and `ramblers-salesforce-server`) pin a tag and update deliberately.
 
+## [v1.0.2] — 2026-07-23
+
+- Added a CommonJS entry point alongside the existing ESM build so NGX server tests and other CommonJS consumers can use the shared runtime validators.
+
 ## [v1.0.1] — 2026-07-23
 
 - Added shared Zod validators for supporter responses, volunteer roles, published errors and writeback success responses so consumers reject invalid payloads before reconciliation.
