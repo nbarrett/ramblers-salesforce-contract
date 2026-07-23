@@ -2,6 +2,20 @@
 
 All notable changes to `@ramblers/sf-contract` are recorded here. The package follows [semver](https://semver.org/): a major version bump signals a breaking change to the wire format, types or schemas. Both consumers (`ramblers-salesforce-mock` and `ramblers-salesforce-server`) pin a tag and update deliberately.
 
+## [v1.0.0] — 2026-07-22
+
+**Breaking: the contract now mirrors the API published by Ramblers Head office** — [JAMESKEARS/ramblers-group-email 1.0.0](https://app.swaggerhub.com/apis/JAMESKEARS/ramblers-group-email/1.0.0) on SwaggerHub — instead of the jointly-proposed #209 shape, which it supersedes.
+
+- `openapi/upstream.json` added: verbatim mirror of the published SwaggerHub document, the authority everything else derives from
+- Types replaced: `Supporter`, `VolunteerRole`, `UnsubscribeRequest`, `BouncedEmailRequest`, `SupporterUpdateSuccess`, `SupporterUpdateError`, `SupportersError` and their enums replace `SalesforceMember`, `MemberListResponse`, `ConsentUpdateRequest`, `ConsentUpdateResponse`, `ApiErrorResponse`
+- Zod schemas replaced: `supportersQuerySchema`, `unsubscribeRequestSchema`, `bouncedEmailRequestSchema`
+- `SupporterProvider` replaces `MemberProvider`: `supporters()`, `unsubscribe()`, `bounce()`
+- Error mapping now keys on upstream `errorType` strings (`STATUS_BY_SUPPORTERS_ERROR_TYPE`, `STATUS_BY_SUPPORTER_UPDATE_ERROR_TYPE`)
+- `buildOpenApiDocument` serves the mirrored upstream document with an injected `publicBaseUrl`
+- `check:schema-sync` now fetches the live SwaggerHub document and fails when the upstream spec or local mirror diverge
+- Upstream quirks mirrored deliberately (`canViewMemberDate` duplicate, "System unavilable" spelling); they track the published spec and will be updated when upstream fixes them
+- `INSIGHT_HUB_COLUMNS` retained unchanged for data generation and legacy import parity
+
 ## [v0.5.0] — 2026-06-21
 
 Adds a static OpenAPI artifact and an Entra-aware security scheme. No wire-format change: the schemas, types and endpoints are identical to v0.4.0, so consumers adopt it without code changes.

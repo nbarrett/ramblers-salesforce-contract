@@ -15,7 +15,7 @@
 - **Architecture**: Node 20+, pure TypeScript, zero runtime web/server framework. Just types, Zod schemas, an OpenAPI builder, and an Insight Hub column table.
 - **Repository**: https://github.com/nbarrett/ramblers-salesforce-contract
 - **Source**: `src/` (TypeScript only). `dist/` is committed build output for git-tag distribution.
-- **Schema source**: `schema/salesforce-api.schema.json` — mirrors [nbarrett/ngx-ramblers#209](https://github.com/nbarrett/ngx-ramblers/issues/209). The `check-schema-sync` script verifies this stays true.
+- **Schema source**: `openapi/upstream.json` — verbatim mirror of the published upstream spec [JAMESKEARS/ramblers-group-email 1.0.0](https://app.swaggerhub.com/apis/JAMESKEARS/ramblers-group-email/1.0.0). `schema/salesforce-api.schema.json` is generated from it. The `check-schema-sync` script fetches the live SwaggerHub document and verifies both stay true. Mirror the upstream verbatim, quirks and typos included; upstream fixes flow through a reviewed mirror update.
 
 ## Code Style
 
@@ -53,14 +53,14 @@
 
 - **Semver tags drive releases.** `v0.1.0`, `v0.2.0`, `vX.Y.Z`. Major = breaking wire change.
 - The repo commits `dist/` so consumers can install via git URL (`github:nbarrett/ramblers-salesforce-contract#vX.Y.Z`) without needing a build step in their own pipeline.
-- **Schema sync against #209.** Every change to `schema/salesforce-api.schema.json` must keep the `check:schema-sync` script green. CI gates the build on this.
+- **Schema sync against the published upstream.** Every change to `openapi/upstream.json` or `schema/salesforce-api.schema.json` must keep the `check:schema-sync` script green. CI fails the build otherwise.
 - **No GitHub Packages publishing yet.** When a second consumer (the production server) needs registry installs, set up the publish workflow then.
 
 ## Build Pipeline
 
 - `pnpm build` — `tsc -p tsconfig.build.json`. Outputs to `dist/`.
 - `pnpm typecheck` — `tsc --noEmit` against the full `tsconfig.json` (includes the lint config and any other `.ts` at the root).
-- `pnpm check:schema-sync` — runs `scripts/check-schema-sync.ts`; fetches issue #209, parses the five JSON Schema blocks out of the body, normalises refs and diffs against `schema/salesforce-api.schema.json`. Exits non-zero on a mismatch.
+- `pnpm check:schema-sync` — runs `scripts/check-schema-sync.ts`; fetches the published SwaggerHub document, diffs it against `openapi/upstream.json`, and verifies `schema/salesforce-api.schema.json` matches the mirrored components. Exits non-zero on a mismatch.
 
 ## Commands
 
@@ -69,7 +69,7 @@ pnpm install                # corepack enable first if pnpm not yet active
 pnpm build                  # tsc → dist/
 pnpm typecheck              # tsc --noEmit (every .ts file)
 pnpm lint                   # eslint src/ scripts/
-pnpm check:schema-sync      # diff schema/salesforce-api.schema.json against ngx-ramblers#209
+pnpm check:schema-sync      # diff the mirror + schema against the published SwaggerHub spec
 pnpm setup:hooks            # one-off — activate .githooks/ for this clone
 ```
 

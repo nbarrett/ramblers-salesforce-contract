@@ -2,8 +2,8 @@
   "openapi": "3.0.3",
   "servers": [
     {
-      "url": "https://salesforce-mock.ngx-ramblers.org.uk",
-      "description": "Reference mock server"
+      "description": "SwaggerHub API Auto Mocking",
+      "url": "https://virtserver.swaggerhub.com/JAMESKEARS/ramblers-group-email/1.0.0"
     }
   ],
   "info": {

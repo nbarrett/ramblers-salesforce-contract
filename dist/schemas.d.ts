@@ -1,53 +1,35 @@
 import { z } from "zod";
-export declare const listMembersQuerySchema: z.ZodObject<{
-    since: z.ZodOptional<z.ZodString>;
-    includeExpired: z.ZodEffects<z.ZodOptional<z.ZodString>, boolean | undefined, string | undefined>;
+export declare const supportersQuerySchema: z.ZodObject<{
+    api_key: z.ZodString;
+    team_code: z.ZodString;
 }, "strip", z.ZodTypeAny, {
-    since?: string | undefined;
-    includeExpired?: boolean | undefined;
+    api_key: string;
+    team_code: string;
 }, {
-    since?: string | undefined;
-    includeExpired?: string | undefined;
+    api_key: string;
+    team_code: string;
 }>;
-export declare const consentUpdateRequestSchema: z.ZodEffects<z.ZodObject<{
-    emailMarketingConsent: z.ZodOptional<z.ZodBoolean>;
-    groupMarketingConsent: z.ZodOptional<z.ZodBoolean>;
-    areaMarketingConsent: z.ZodOptional<z.ZodBoolean>;
-    otherMarketingConsent: z.ZodOptional<z.ZodBoolean>;
-    source: z.ZodEnum<["ngx-ramblers", "mailman"]>;
-    timestamp: z.ZodString;
-    reason: z.ZodOptional<z.ZodString>;
+export declare const unsubscribeRequestSchema: z.ZodObject<{
+    emailAddress: z.ZodString;
+    memberRef: z.ZodString;
 }, "strip", z.ZodTypeAny, {
-    source: "ngx-ramblers" | "mailman";
-    timestamp: string;
-    emailMarketingConsent?: boolean | undefined;
-    groupMarketingConsent?: boolean | undefined;
-    areaMarketingConsent?: boolean | undefined;
-    otherMarketingConsent?: boolean | undefined;
-    reason?: string | undefined;
+    emailAddress: string;
+    memberRef: string;
 }, {
-    source: "ngx-ramblers" | "mailman";
-    timestamp: string;
-    emailMarketingConsent?: boolean | undefined;
-    groupMarketingConsent?: boolean | undefined;
-    areaMarketingConsent?: boolean | undefined;
-    otherMarketingConsent?: boolean | undefined;
-    reason?: string | undefined;
-}>, {
-    source: "ngx-ramblers" | "mailman";
-    timestamp: string;
-    emailMarketingConsent?: boolean | undefined;
-    groupMarketingConsent?: boolean | undefined;
-    areaMarketingConsent?: boolean | undefined;
-    otherMarketingConsent?: boolean | undefined;
-    reason?: string | undefined;
+    emailAddress: string;
+    memberRef: string;
+}>;
+export declare const bouncedEmailRequestSchema: z.ZodObject<{
+    emailAddress: z.ZodString;
+    memberRef: z.ZodString;
+    bounceType: z.ZodEnum<["Hard", "Soft"]>;
+}, "strip", z.ZodTypeAny, {
+    emailAddress: string;
+    memberRef: string;
+    bounceType: "Hard" | "Soft";
 }, {
-    source: "ngx-ramblers" | "mailman";
-    timestamp: string;
-    emailMarketingConsent?: boolean | undefined;
-    groupMarketingConsent?: boolean | undefined;
-    areaMarketingConsent?: boolean | undefined;
-    otherMarketingConsent?: boolean | undefined;
-    reason?: string | undefined;
+    emailAddress: string;
+    memberRef: string;
+    bounceType: "Hard" | "Soft";
 }>;
 //# sourceMappingURL=schemas.d.ts.map
